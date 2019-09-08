@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block title %}Index{% endblock %}
+{% block content %}
+{% include '_flash_message.html' %}
+
+
+{% if current_user.is_admin() %}
+<div class="row">
+    <div class="col-md-12 text-center" style="margin: 20px 0 20px 0;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal" data-action="newUser">
+            Create user
+        </button>
+    </div>
+</div>
+{% endif %}
+<div class="row">
+    <div class="col-md-12 text-center">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Access</th>
+                {% if current_user.is_admin() %}
+                <th scope="col">Edit</th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+            <tr class="user-{{ user.id }}">
+                <td>{{ user.id }}</td>
+                <td class="username-{{ user.id }}">{{ user.username }}</td>
+                <td class="role-{{ user.id }}">{{ user.role }}</td>
+                {% if current_user.is_admin() %}
+                <td>[<a href="#" id="edit" data-action="edit" data-user-id="{{ user.id }}">Edit</a>] | [<a href="#" id="delete"
+                                                                                        data-user-id="{{ user.id }}">Delete</a>]
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% if current_user.is_admin() %}
+{% include '_modal.html' %}
+{% endif  %}
+{% endblock %}

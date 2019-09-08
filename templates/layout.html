@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <a class="nav-link" href="{{ url_for('index') }}">Main page</a>
+        {% if not current_user.is_authenticated %}<a class="nav-link" href="{{ url_for('login') }}">Login page</a>
+        <a class="nav-link" href="{{ url_for('register') }}">Register page</a>{%
+        endif %}
+        {% if current_user.is_authenticated %}Logged in: {{ current_user.username }} <a href="{{ url_for('logout') }}">Logout</a>{%
+        endif %}
+    </nav>
+    {% block content %}
+    {% endblock %}
+</div>
+    <script src="{{ url_for('static', filename='api.js') }}"></script>
+</body>
+</html>
