@@ -1,14 +1,11 @@
-import enum
 import hashlib
 
-from flask import Flask, Blueprint, render_template, request, current_app, flash, url_for, jsonify
+from flask import Flask, render_template, request, flash, url_for, jsonify
 from flask_login import UserMixin, LoginManager, login_required, login_user, logout_user, current_user
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 ## Init app
-from sqlalchemy import text
-from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm.exc import NoResultFound
