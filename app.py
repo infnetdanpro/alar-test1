@@ -246,6 +246,11 @@ def api_users(user_id=None):
 
         if request.form.get('username'):
             user.username = request.form.get('username')
+            if len(request.form.get('username')) < 4:
+                return jsonify({'result': False, 'message': 'Username length must be more or equal 4'}), 406
+
+        if len(request.form.get('password')) < 4:
+            return jsonify({'result': False, 'message': 'Password length must be more or equal 4'}), 406
 
         if request.form.get('password') and len(request.form.get('password')) > 0:
             if md5hash(request.form.get('password')) != user.password:

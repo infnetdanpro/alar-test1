@@ -17,13 +17,15 @@ function create_user(username, password, role_id, callback_success) {
         success: callback_success,
         error: response => {
             alert(`Status Code: ${response.status}. Message: ${response.responseJSON.message}.`);
+            if (response.status === 201) {
+                $(document).ready(function() {
+                    $('a#delete').on("click", delete_element);
+                    $('a#edit').on('click', edit_user);
+                    $('#Modal').modal('hide');
+                    clear_form();
+                });
+            }
 
-            $(document).ready(function() {
-                $('a#delete').on("click", delete_element);
-                $('a#edit').on('click', edit_user);
-                $('#Modal').modal('hide');
-                clear_form();
-            });
         }
     });
 }
@@ -41,12 +43,13 @@ console.log(user_id, username, password, role_id, callback_success)
         success: callback_success,
         error: response => {
             alert(`Status Code: ${response.status}. Message: ${response.responseJSON.message}.`);
-
-            $(document).ready(function() {
-//                $('a#edit').on("click", delete_element);
-                $('#Modal').modal('hide');
-                clear_form();
-            });
+            if (response.status === 201) {
+                $(document).ready(function() {
+    //                $('a#edit').on("click", delete_element);
+                    $('#Modal').modal('hide');
+                    clear_form();
+                });
+            }
         }
     });
 }
