@@ -9,13 +9,6 @@ function get_user(user_id, callback_success) {
     });
 }
 
-
-function clear_form(){
-  $('.username').val('');
-  $('.password').val('');
-  return true
-}
-
 function create_user(username, password, role_id, callback_success) {
     $.ajax({
         url: '/api/1.0/users',
@@ -80,6 +73,12 @@ function delete_user(user_id, callback_success, callback_error) {
             }
         });
     }
+
+function clear_form(){
+  $('.username').val('');
+  $('.password').val('');
+  return true
+}
 
 function delete_element(e) {
     e.preventDefault()
