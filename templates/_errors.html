@@ -1,0 +1,7 @@
+{% if form.errors %}
+    {% for error in form.errors %}
+        <div class="alert alert-primary" role="alert">
+            <b>{{ error|capitalize }}</b>: {{ form.errors[error][0] }}
+        </div>
+    {% endfor %}
+{% endif %}

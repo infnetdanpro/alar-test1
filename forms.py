@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, validators, SelectField
+from wtforms.validators import InputRequired, Length
 
 
 class UserForm(FlaskForm):
-    username = StringField('Username', validators=[validators.DataRequired(), validators.Length(min=4, max=64)])
-    password = PasswordField('Password', validators=[validators.DataRequired(), validators.Length(min=4, max=32)])
+    username = StringField('Username', validators=[InputRequired(message='This field is required!'), Length(min=4, max=64, message='min 4, max 64')])
+    password = PasswordField('Password', validators={InputRequired(message='This field is required!'), Length(min=4, max=32, message='min 4, max 32')})
     submit = SubmitField('Submit')
 
 
