@@ -236,7 +236,7 @@ def api_users(user_id=None):
 
     if request.method == 'PUT':
         if not current_user.is_admin():
-            return jsonify({'result': False}), 403
+            return jsonify({'result': False, 'message': 'You don\'t have access to this method'}), 403
         try:
             user = db.session.query(User).filter(User.id == user_id).one()
         except NoResultFound:
@@ -257,7 +257,7 @@ def api_users(user_id=None):
         return jsonify({'result': True}), 201
     if request.method == 'DELETE':
         if not current_user.is_admin():
-            return jsonify({'result': False}), 403
+            return jsonify({'result': False, 'message': 'You don\'t have access to this method'}), 403
         try:
             user = db.session.query(User).filter(User.id == request.form.get('user_id', 0, int)).one()
         except NoResultFound:
