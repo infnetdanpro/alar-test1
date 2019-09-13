@@ -136,6 +136,8 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if len(db.session.query(User).all()) < 1:
+        return redirect(url_for('register'))
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
         try:
