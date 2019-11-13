@@ -136,7 +136,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if len(db.session.query(User).all()) < 1:
+    if db.session.query(User).count() < 1:
         return redirect(url_for('register'))
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
@@ -172,7 +172,7 @@ def register():
             db.session.add(user)
             db.session.commit()
             signal_log_in(user)
-            if len(db.session.query(User).all()) == 1:
+            if db.session.query(User).count() == 1:
                 user.set_role('admin')
             else:
                 user.set_role('guest')
@@ -199,7 +199,7 @@ def check_user_data(request):
 
 
 ## API
-version = 1.0
+version = 1.1
 
 
 @app.route(f'/api/{version}/users/<int:user_id>', methods=['GET', 'PUT', 'DELETE'])
