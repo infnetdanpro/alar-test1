@@ -1,6 +1,6 @@
 function get_user(user_id, callback_success) {
     $.ajax({
-        url: `/api/1.0/users/${user_id}`,
+        url: `/api/1.1/users/${user_id}`,
         method: 'GET',
         success: callback_success,
         error: response => {
@@ -11,7 +11,7 @@ function get_user(user_id, callback_success) {
 
 function create_user(username, password, role_id, callback_success) {
     $.ajax({
-        url: '/api/1.0/users',
+        url: '/api/1.1/users',
         method: 'POST',
         data: {username, password, role_id},
         success: callback_success,
@@ -37,7 +37,7 @@ console.log(user_id, username, password, role_id, callback_success)
         data.password = password
     }
     $.ajax({
-        url: `/api/1.0/users/${user_id}`,
+        url: `/api/1.1/users/${user_id}`,
         method: 'PUT',
         data: data,
         success: callback_success,
@@ -56,7 +56,7 @@ console.log(user_id, username, password, role_id, callback_success)
 
 function delete_user(user_id, callback_success, callback_error) {
         $.ajax({
-            url: `/api/1.0/users/${user_id}`,
+            url: `/api/1.1/users/${user_id}`,
             method: "DELETE",
             data: {user_id: user_id},
             success: callback_success,
